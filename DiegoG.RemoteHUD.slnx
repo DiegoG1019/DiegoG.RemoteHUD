@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.Extended/DiegoG.MonoGame.Extended.csproj" />
+  <Project Path="DiegoG.RemoteHUD/DiegoG.RemoteHUD.csproj" />
+</Solution>
