@@ -1,7 +1,8 @@
 using System;
+using DiegoG.RemoteHud.HudElements;
 using ImGuiNET;
 
-namespace DiegoG.RemoteHud.HudElements;
+namespace DiegoG.RemoteHUD;
 
 public static class ImGuiHelpers
 {

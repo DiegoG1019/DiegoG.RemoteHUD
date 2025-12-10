@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using DiegoG.MonoGame.Extended;
+using DiegoG.RemoteHUD;
 using DiegoG.RemoteHud.DTO;
 using DiegoG.RemoteHud.HudManagers;
 using ImGuiNET;

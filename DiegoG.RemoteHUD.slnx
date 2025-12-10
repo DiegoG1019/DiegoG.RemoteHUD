@@ -1,4 +1,9 @@
 <Solution>
-  <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.Extended/DiegoG.MonoGame.Extended.csproj" />
+  <Folder Name="/External/">
+    <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.Extended/DiegoG.MonoGame.Extended.csproj" />
+    <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.Network/DiegoG.MonoGame.Network.csproj" />
+    <Project Path="../MonoGame.Extended/source/MonoGame.Extended/MonoGame.Extended.csproj" />
+    <Project Path="../MonoGame.ImGuiNet/MonoGame.ImGuiNet/MonoGame.ImGuiNet.csproj" />
+  </Folder>
   <Project Path="DiegoG.RemoteHUD/DiegoG.RemoteHUD.csproj" />
 </Solution>

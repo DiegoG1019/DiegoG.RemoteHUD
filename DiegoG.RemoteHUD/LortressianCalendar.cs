@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace DiegoG.RemoteHud.HudElements;
+namespace DiegoG.RemoteHUD;
 
 public enum LortressianDayOfWeek
 {
