@@ -31,10 +31,12 @@
     <PackageReference Include="GLV.Shared.Common" Version="1.3.2511.2820" />
     <PackageReference Include="GLV.Shared.Data" Version="1.3.2511.2820" />
     <PackageReference Include="GLV.Shared.Networking" Version="1.3.2511.2820" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.4.1" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DiegoG.MonoGame\DiegoG.MonoGame.DependencyInjection\DiegoG.MonoGame.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\DiegoG.MonoGame\DiegoG.MonoGame.Extended\DiegoG.MonoGame.Extended.csproj" />
     <ProjectReference Include="..\..\DiegoG.MonoGame\DiegoG.MonoGame.Network\DiegoG.MonoGame.Network.csproj" />
     <ProjectReference Include="..\..\MonoGame.Extended\source\MonoGame.Extended\MonoGame.Extended.csproj" />

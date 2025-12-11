@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using DiegoG.MonoGame.Extended;
 using DiegoG.RemoteHud;
 using DiegoG.RemoteHud.DTO;
+using GLV.Shared.Common;
+using GLV.Shared.Common.Text;
 using GLV.Shared.Networking;
+using ImGuiNET;
 using Microsoft.Xna.Framework;
 
 // ReSharper disable InconsistentlySynchronizedField
@@ -15,7 +18,7 @@ namespace DiegoG.RemoteHud.HudManagers;
 
 // TODO: Include the hash as part of the handshake 
 
-public abstract class HudManager(RemoteHudGame game) : IDrawable, IUpdateable, IGameComponent
+public abstract class HudManager(RemoteHudGame game) : IDrawable, IUpdateable, IGameComponent, IDebugExplorable
 {
     protected class QueuedMessage
     {
@@ -159,4 +162,20 @@ public abstract class HudManager(RemoteHudGame game) : IDrawable, IUpdateable, I
     }
 
     public virtual void Initialize() { }
+    
+    public void RenderImGuiDebug()
+    {
+        foreach (var (key, item) in items)
+        {
+            if (item is IDebugExplorable expl)
+            {
+                if (!ImGui.TreeNode(item.DebugName)) continue;
+                
+                expl.RenderImGuiDebug();
+                ImGui.TreePop();
+            }
+            else
+                ImGui.LabelText(item.DebugName, "");
+        }
+    }
 }

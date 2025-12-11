@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/External/">
+    <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.DependencyInjection/DiegoG.MonoGame.DependencyInjection.csproj" />
     <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.Extended/DiegoG.MonoGame.Extended.csproj" />
     <Project Path="../DiegoG.MonoGame/DiegoG.MonoGame.Network/DiegoG.MonoGame.Network.csproj" />
     <Project Path="../MonoGame.Extended/source/MonoGame.Extended/MonoGame.Extended.csproj" />

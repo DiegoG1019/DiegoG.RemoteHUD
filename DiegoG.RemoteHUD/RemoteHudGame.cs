@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DiegoG.MonoGame.DependencyInjection;
 using DiegoG.MonoGame.Extended;
 using DiegoG.MonoGame.Extended.Tasks;
 using DiegoG.MonoGame.Extended.UIComponents;
 using DiegoG.RemoteHud;
 using DiegoG.RemoteHud.HudManagers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -24,16 +26,12 @@ public class RemoteHudGame : Game
     public StatefulSpriteBatch SpriteBatch { get; private set; } = null!;
     public SpriteFont DebugFont { get; private set; } = null!;
     public CallDeferrer Deferrer { get; }
-    public MouseStateMemory MouseState => mouse;
-    private MouseStateMemory mouse;
-    
-    public KeyboardStateExtended KeyboardState => keyboard;
-    private KeyboardStateExtended keyboard;
-    
+    public MouseStateMemory MouseState { get; private set; }
+    public KeyboardStateExtended KeyboardState { get; private set; }
+    public Scene MainMenuScene { get; }
+    public GameServiceProvider GameServices { get; private set; } = null!;
 
     private ImGuiRenderer imGuiRenderer = null!;
-
-    public Scene MainMenuScene { get; }
 
     public HudManager? HudManager
     {
@@ -76,7 +74,17 @@ public class RemoteHudGame : Game
 
         DebugFont = Content.Load<SpriteFont>("Fonts/CascadiaMono");
         
-        Components.Add((new DebugImGuiViews(this)));
+        Components.Add(new DebugImGuiViews(this));
+        
+        GameServices = new GameServiceProvider(this, services =>
+        {
+            services.AddSingleton(this);
+            services.AddSingleton(SpriteBatch);
+            services.AddSingleton<SpriteBatch>(SpriteBatch);
+            services.AddTransient<HudManager>(s => s.GetRequiredService<RemoteHudGame>().HudManager!);
+            foreach (var (id, element) in HudElementStore.Elements)
+                services.AddTransient(element.ElementType);
+        });
     }
 
     protected override void LoadContent()
@@ -96,9 +104,9 @@ public class RemoteHudGame : Game
         base.Update(gameTime);
         
         Deferrer.ExecuteUpdateEndDeferredCalls(gameTime);
-        mouse = new MouseStateMemory(mouse, Mouse.GetState());
+        MouseState = new MouseStateMemory(MouseState, Mouse.GetState());
         KeyboardExtended.Update();
-        keyboard = KeyboardExtended.GetState();
+        KeyboardState = KeyboardExtended.GetState();
     }
 
     protected override void Draw(GameTime gameTime)

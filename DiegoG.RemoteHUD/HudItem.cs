@@ -12,7 +12,8 @@ namespace DiegoG.RemoteHud;
 public abstract class HudItem(HudManager manager) : DrawableGameComponent(manager.Game), IPositionable
 {
     public long UniqueId { get; } = Snowflake.New().AsLong();
-
+    public string DebugName => field ??= $"{UniqueId}:{GetType().Name}";
+    
     public HudManager Manager { get; } = manager ?? throw new ArgumentNullException(nameof(manager));
     
     protected abstract bool HasChanged { get; }
